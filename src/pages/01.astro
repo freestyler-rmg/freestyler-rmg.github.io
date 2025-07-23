@@ -1,0 +1,160 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SakuraLink from '../components/SakuraLink.astro';
+
+const boxContainers = Array.from({ length: 8 }, (_, i) => i + 1);
+const boxes = Array.from({ length: 50 }, (_, i) => i + 1);
+---
+
+<Layout>
+  <div class="container">
+    <div class="additional-container">
+      <div class="go-away">
+        {boxContainers.map(long => (
+          <div class="longggggg" key={long}>
+            {boxes.map(box => (
+              <div class="boxxxxx" key={`${long}-${box}`}>
+                <div></div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <SakuraLink link="02" />
+  </div>
+</Layout>
+
+<style>
+:root {
+  --color-one-fresh: #333;
+  --color-one-pale: #ddd;
+  --color-two-fresh: #222;
+  --color-two-pale: #ccc;
+}
+
+.container {
+  background: linear-gradient(to bottom, var(--color-one-fresh), #fff);
+  max-width: 777px;
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+}
+
+.additional-container {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.go-away {
+  flex: 0 0 777px;
+  transform-style: preserve-3d;
+  transform: perspective(40px) rotateX(15deg) scaleX(3) translate3d(0, 10px, -40px);
+}
+
+.longggggg {
+  width: 100%;
+  font-size: 0;
+  letter-spacing: 0;
+  line-height: 0;
+  .boxxxxx {
+    display: inline-block;
+    width: 4%;
+    position: relative;
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      width: 100%;
+      padding-top: 0;
+      animation-duration: 0.3s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    & > div {
+      width: 100%;
+      padding-top: 100%;
+    }
+
+    &::before {
+      animation-name: first;
+    }
+    &::after {
+      animation-name: second;
+    }
+
+    &:nth-child(even) {
+      &::before {
+        background-color: var(--color-one-pale);
+      }
+      &::after,
+      & > div {
+        background-color: var(--color-two-pale);
+      }
+
+      &:nth-child(n + 26) {
+        &::before {
+          background-color: var(--color-one-fresh);
+        }
+        &::after,
+        & > div {
+          background-color: var(--color-two-fresh);
+        }
+      }
+    }
+
+    &:nth-child(odd) {
+      &::before {
+        background-color: var(--color-two-fresh);
+      }
+      &::after,
+      & > div {
+        background-color: var(--color-one-fresh);
+      }
+
+      &:nth-child(n + 26) {
+        &::before {
+          background-color: var(--color-two-pale);
+        }
+        &::after,
+        & > div {
+          background-color: var(--color-one-pale);
+        }
+      }
+    }
+  }
+}
+
+@keyframes first {
+  from {
+    padding-top: 0;
+  }
+  50% {
+    padding-top: 100%;
+  }
+  to {
+    padding-top: 100%;
+  }
+}
+@keyframes second {
+  from {
+    padding-top: 0;
+  }
+  50% {
+    padding-top: 0;
+  }
+  to {
+    padding-top: 100%;
+  }
+}
+</style>
