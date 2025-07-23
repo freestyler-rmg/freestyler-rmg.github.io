@@ -3,10 +3,242 @@ import Layout from '../layouts/Layout.astro';
 import SakuraLink from '../components/SakuraLink.astro';
 ---
 
-<Layout>
-  <div></div>
+<Layout pageTitle="Solar System Revolution">
+  <div class="container">
+    <div class="inner-container">
+      <div class="sun"></div>
+      <div class="planet mercury" />
+      <div class="planet venus" />
+      <div class="planet earth" />
+      <div class="planet mars" />
+      <div class="planet jupiter" />
+      <div class="planet saturn" />
+      <div class="planet uranus" />
+      <div class="planet neptune" />
+    </div>
+
+    <SakuraLink link="06" />
+  </div>
 </Layout>
 
 <style>
+:root {
+  --earth-dia: 20px;
+  --mercury-dia: calc(0.38 * var(--earth-dia));
+  --venus-dia: calc(0.95 * var(--earth-dia));
+  --mars-dia: calc(0.53 * var(--earth-dia));
+  --jupiter-dia: calc(11.21 * var(--earth-dia));
+  --saturn-dia: calc(9.45 * var(--earth-dia));
+  --uranus-dia: calc(4.01 * var(--earth-dia));
+  --neptune-dia: calc(3.88 * var(--earth-dia));
 
+  --sun-dia: 1000px;
+
+  --earth-dist-dia: calc(100px + var(--sun-dia));
+  --mercury-dist-dia: calc((0.39 * var(--earth-dist-dia)) + var(--sun-dia));
+  --venus-dist-dia: calc((0.72 * var(--earth-dist-dia)) + var(--sun-dia));
+  --mars-dist-dia: calc((1.52 * var(--earth-dist-dia)) + var(--sun-dia));
+  --jupiter-dist-dia: calc((5.2 * var(--earth-dist-dia)) + var(--sun-dia));
+  --saturn-dist-dia: calc((9.54 * var(--earth-dist-dia)) + var(--sun-dia));
+  --uranus-dist-dia: calc((19.2 * var(--earth-dist-dia)) + var(--sun-dia));
+  --neptune-dist-dia: calc((30.1 * var(--earth-dist-dia)) + var(--sun-dia));
+
+  --earth-orbital: 1s;
+  --mercury-orbital: calc(0.24 * var(--earth-orbital));
+  --venus-orbital: calc(0.62 * var(--earth-orbital));
+  --mars-orbital: calc(1.88 * var(--earth-orbital));
+  --jupiter-orbital: calc(11.9 * var(--earth-orbital));
+  --saturn-orbital: calc(29.5 * var(--earth-orbital));
+  --uranus-orbital: calc(84 * var(--earth-orbital));
+  --neptune-orbital: calc(165 * var(--earth-orbital));
+
+  /* unfinished logic for different tilt */
+  --tilt: 90deg;
+}
+
+
+.container {
+  max-width: 777px;
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.inner-container {
+  max-width: 777px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  transform: scale(0.3) rotateX(var(--tilt));
+  div {
+    border-radius: 50%;
+  }
+}
+
+.sun {
+  width: var(--sun-dia);
+  height: var(--sun-dia);
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: rotateX(calc(-1 * (var(--tilt))));
+}
+
+.planet {
+  position: absolute;
+  width: 0;
+  height: 0;
+  animation-name: orbit;
+  transform: rotateZ(0deg);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  transform-style: preserve-3d;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid #636363;
+  }
+  &::after {
+    content: '';
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    animation-name: rotation;
+    transform: translateX(-50%) rotateX(calc(-1 * (var(--tilt)))) rotateY(0deg);
+    transform-origin: center;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+}
+
+.mercury {
+  width: var(--mercury-dist-dia);
+  height: var(--mercury-dist-dia);
+  animation-duration: var(--mercury-orbital);
+  &::after {
+    width: var(--mercury-dia);
+    height: var(--mercury-dia);
+    top: calc(var(--mercury-dia) / 2 * -1);
+    animation-duration: var(--mercury-orbital);
+  }
+}
+
+.venus {
+  width: var(--venus-dist-dia);
+  height: var(--venus-dist-dia);
+  animation-duration: var(--venus-orbital);
+  &::after {
+    width: var(--venus-dia);
+    height: var(--venus-dia);
+    top: calc(var(--venus-dia) / 2 * -1);
+    animation-duration: var(--venus-orbital);
+  }
+}
+
+.earth {
+  width: var(--earth-dist-dia);
+  height: var(--earth-dist-dia);
+  animation-duration: var(--earth-orbital);
+  &::after {
+    width: var(--earth-dia);
+    height: var(--earth-dia);
+    top: calc(var(--earth-dia) / 2 * -1);
+    animation-duration: var(--earth-orbital);
+  }
+}
+
+.mars {
+  width: var(--mars-dist-dia);
+  height: var(--mars-dist-dia);
+  animation-duration: var(--mars-orbital);
+  &::after {
+    width: var(--mars-dia);
+    height: var(--mars-dia);
+    top: calc(var(--mars-dia) / 2 * -1);
+    animation-duration: var(--mars-orbital);
+  }
+}
+
+.jupiter {
+  width: var(--jupiter-dist-dia);
+  height: var(--jupiter-dist-dia);
+  animation-duration: var(--jupiter-orbital);
+  &::after {
+    width: var(--jupiter-dia);
+    height: var(--jupiter-dia);
+    top: calc(var(--jupiter-dia) / 2 * -1);
+    animation-duration: var(--jupiter-orbital);
+  }
+}
+
+.saturn {
+  width: var(--saturn-dist-dia);
+  height: var(--saturn-dist-dia);
+  animation-duration: var(--saturn-orbital);
+  &::after {
+    width: var(--saturn-dia);
+    height: var(--saturn-dia);
+    top: calc(var(--saturn-dia) / 2 * -1);
+    animation-duration: var(--saturn-orbital);
+  }
+}
+
+.uranus {
+  width: var(--uranus-dist-dia);
+  height: var(--uranus-dist-dia);
+  animation-duration: var(--uranus-orbital);
+  &::after {
+    width: var(--uranus-dia);
+    height: var(--uranus-dia);
+    top: calc(var(--uranus-dia) / 2 * -1);
+    animation-duration: var(--uranus-orbital);
+  }
+}
+
+.neptune {
+  width: var(--neptune-dist-dia);
+  height: var(--neptune-dist-dia);
+  animation-duration: var(--neptune-orbital);
+  &::after {
+    width: var(--neptune-dia);
+    height: var(--neptune-dia);
+    top: calc(var(--neptune-dia) / 2 * -1);
+    animation-duration: var(--neptune-orbital);
+  }
+}
+
+@keyframes orbit {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+@keyframes rotation {
+  0% {
+    transform: translateX(-50%) rotateX(calc(-1 * (var(--tilt)))) rotateY(0deg);
+  }
+  25% {
+    transform: translateX(-50%) rotateX(calc(-1 * (var(--tilt)))) rotateY(90deg);
+  }
+  50% {
+    transform: translateX(-50%) rotateX(calc(-1 * (var(--tilt)))) rotateY(180deg);
+  }
+  75% {
+    transform: translateX(-50%) rotateX(calc(-1 * (var(--tilt)))) rotateY(270deg);
+  }
+  100% {
+    transform: translateX(-50%) rotateX(calc(-1 * (var(--tilt)))) rotateY(360deg);
+  }
+}
 </style>
