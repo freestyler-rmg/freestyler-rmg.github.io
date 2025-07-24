@@ -3,10 +3,179 @@ import Layout from '../layouts/Layout.astro';
 import SakuraLink from '../components/SakuraLink.astro';
 ---
 
-<Layout>
-  <div></div>
+<Layout pageTitle="Ascend to The Void">
+  <div class="container">
+    <div class="inner-container">
+      <div class="stair first-step"></div>
+      <div class="stair second-step"></div>
+      <div class="stair third-step"></div>
+      <div class="stair fourth-step"></div>
+      <div class="stair fifth-step"></div>
+      <div class="stair sixth-step"></div>
+    </div>
+
+    <SakuraLink link="06" />
+  </div>
 </Layout>
 
 <style>
+:root {
+  --border-width: 16px;
+  --second-height: 188px;
+  --third-height: 316px;
+  --fourth-height: 402px;
+  --fifth-height: 462px;
+  --sixth-height: 503px;
 
+  --second-scale: 0.68;
+  --third-scale: 0.46;
+  --fourth-scale: 0.32;
+  --fifth-scale: 0.22;
+  --sixth-scale: 0.154;
+
+  --first-opacity: 0.68;
+  --second-opacity: 0.46;
+  --third-opacity: 0.32;
+  --fourth-opacity: 0.22;
+  --fifth-opacity: 0.154;
+}
+.container {
+  max-width: 777px;
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.inner-container {
+  width: 100%;
+  max-width: 777px;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column-reverse;
+  position: relative;
+  align-items: flex-end;
+}
+
+.stair {
+  width: 100%;
+  height: 160px;
+  border: var(--border-width) solid #fff;
+  position: absolute;
+  perspective: 45px;
+  transform-origin: center bottom;
+  &::before {
+    content: '';
+    width: 100%;
+    height: calc(var(--border-width) + 3px);
+    background-color: #000;
+    position: absolute;
+    left: 0;
+    bottom: calc(-1 * var(--border-width));
+  }
+  &::after {
+    content: '';
+    width: calc(100% + var(--border-width) * 2);
+    height: 80px;
+    position: absolute;
+    left: calc(-1 * var(--border-width));
+    transform-origin: center bottom;
+    /* transform-style: preserve-3d; */
+    transform: rotateX(15deg);
+    top: calc(-80px - var(--border-width));
+    border-left: var(--border-width) solid #fff;
+    border-top: var(--border-width) solid #fff;
+    border-right: var(--border-width) solid #fff;
+  }
+}
+
+.first-step {
+  bottom: 0;
+  opacity: var(--first-opacity);
+  animation: first-step 4s ease-in-out infinite;
+}
+
+.second-step {
+  transform: scale(var(--second-scale));
+  bottom: var(--second-height);
+  opacity: var(--second-opacity);
+  animation: second-step 4s ease-in-out infinite;
+}
+
+.third-step {
+  transform: scale(var(--third-scale));
+  bottom: var(--third-height);
+  opacity: var(--third-opacity);
+  animation: third-step 4s ease-in-out infinite;
+}
+
+.fourth-step {
+  transform: scale(var(--fourth-scale));
+  bottom: var(--fourth-height);
+  opacity: var(--fourth-opacity);
+  animation: fourth-step 4s ease-in-out infinite;
+}
+
+.fifth-step {
+  transform: scale(var(--fifth-scale));
+  bottom: var(--fifth-height);
+  opacity: var(--fifth-opacity);
+  animation: fifth-step 4s ease-in-out infinite;
+}
+
+.sixth-step {
+  transform: scale(var(--sixth-scale));
+  bottom: var(--sixth-height);
+  opacity: 0;
+  animation: sixth-step 4s ease-in-out infinite;
+}
+
+@keyframes first-step {
+  to {
+    transform: scale(1.45);
+    bottom: -272px;
+    opacity: 1;
+  }
+}
+
+@keyframes second-step {
+  to {
+    transform: scale(1);
+    bottom: 0;
+    opacity: var(--first-opacity);
+  }
+}
+
+@keyframes third-step {
+  to {
+    transform: scale(var(--second-scale));
+    bottom: var(--second-height);
+    opacity: var(--second-opacity);
+  }
+}
+
+@keyframes fourth-step {
+  to {
+    transform: scale(var(--third-scale));
+    bottom: var(--third-height);
+    opacity: var(--third-opacity);
+  }
+}
+
+@keyframes fifth-step {
+  to {
+    transform: scale(var(--fourth-scale));
+    bottom: var(--fourth-height);
+    opacity: var(--fourth-opacity);
+  }
+}
+
+@keyframes sixth-step {
+  to {
+    transform: scale(var(--fifth-scale));
+    bottom: var(--fifth-height);
+    opacity: var(--fifth-opacity);
+  }
+}
 </style>
