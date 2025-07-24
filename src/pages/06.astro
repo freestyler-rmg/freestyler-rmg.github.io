@@ -3,10 +3,124 @@ import Layout from '../layouts/Layout.astro';
 import SakuraLink from '../components/SakuraLink.astro';
 ---
 
-<Layout>
-  <div></div>
+<Layout pageTitle="Walking Through The Gates">
+  <div class="container">
+    <div class="inner-container">
+      <div class="gate too-far-distance"></div>
+      <div class="gate farthest-distance"></div>
+      <div class="gate medium-distance"></div>
+      <div class="gate nearest-distance"></div>
+    </div>
+
+    <SakuraLink link="01" />
+  </div>
 </Layout>
 
 <style>
+.container {
+  max-width: 777px;
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  overflow: hidden;
+}
 
+.inner-container {
+  width: 100%;
+  max-width: 777px;
+  height: 100vh;
+  display: flex;
+  position: relative;
+}
+
+.gate {
+  flex: 0 0 100%;
+  border: 16px solid #888;
+  border-bottom: 8px solid transparent;
+  position: absolute;
+  inset: 0;
+  transform-origin: center 70%;
+  box-shadow: 0 0 0 32px #fff;
+  &::after {
+    content: '';
+    position: absolute;
+    border-bottom: solid 36px #000;
+    inset: 0;
+    width: calc(100% + 96px);
+    height: calc(100% + 32px);
+    transform: translate(-48px, 8px);
+    z-index: 1;
+  }
+}
+
+.nearest-distance {
+  transform: scale(1);
+  bottom: 0;
+  animation: walking-nearest 4s infinite normal ease-out;
+}
+
+.medium-distance {
+  transform: scale(0.7);
+  bottom: 64px;
+  animation: walking-medium 4s infinite normal ease-out;
+}
+
+.farthest-distance {
+  transform: scale(0.4);
+  bottom: 128px;
+  animation: walking-farthest 4s infinite normal ease-out;
+}
+
+.too-far-distance {
+  transform: scale(0.2);
+  bottom: 192px;
+  animation: walking-too-far 4s infinite normal ease-out;
+}
+
+@keyframes walking-nearest {
+  0% {
+    transform: scale(1);
+    border-bottom: 8px solid transparent;
+  }
+
+  100% {
+    transform: scale(1.4);
+    border-bottom: 0px solid transparent;
+  }
+}
+
+@keyframes walking-medium {
+  0% {
+    transform: scale(0.7));
+    bottom: 64px
+  }
+  100% {
+    transform: scale(1);
+    bottom: 0;
+  }
+}
+
+@keyframes walking-farthest {
+  0% {
+    transform: scale(0.4);
+    bottom: 128px;
+  }
+  100% {
+    transform: scale(0.7);
+    bottom: 64px;
+  }
+}
+
+@keyframes walking-too-far {
+  0% {
+    opacity: 0;
+    transform: scale(0.15);
+    bottom: 192px;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(0.4);
+    bottom: 128px;
+  }
+}
 </style>
