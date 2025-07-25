@@ -5,7 +5,7 @@ import SakuraLink from '../components/SakuraLink.astro';
 const box = Array.from({ length: 7 }, (_, i) => i++);
 ---
 
-<Layout pageTitle="Scrolling Radiating Gradient">
+<Layout pageTitle="Scrolling Strips">
   <div class="container">
     <div class="inner-container">
       <!-- <div v-for="box in 7" :key="box" class="box" /> -->
@@ -43,16 +43,17 @@ const box = Array.from({ length: 7 }, (_, i) => i++);
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   box-shadow: inset 0 0 70px #333;
+  animation-delay: -0.9s;
   &:nth-child(2),
   &:nth-child(6) {
-    animation-delay: 0.3s;
+    animation-delay: -0.6s;
   }
   &:nth-child(3),
   &:nth-child(5) {
-    animation-delay: 0.6s;
+    animation-delay: -0.3s;
   }
   &:nth-child(4) {
-    animation-delay: 0.9s;
+    animation-delay: 0s;
   }
 }
 
