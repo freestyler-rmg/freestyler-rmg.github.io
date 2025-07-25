@@ -38,6 +38,8 @@ import SakuraLink from '../components/SakuraLink.astro';
   --third-opacity: 0.32;
   --fourth-opacity: 0.22;
   --fifth-opacity: 0.154;
+
+  --animation-duration: 5s;
 }
 .container {
   max-width: 777px;
@@ -56,6 +58,7 @@ import SakuraLink from '../components/SakuraLink.astro';
   flex-direction: column-reverse;
   position: relative;
   align-items: flex-end;
+  animation: stair-container var(--animation-duration) ease-in-out infinite;
 }
 
 .stair {
@@ -93,46 +96,51 @@ import SakuraLink from '../components/SakuraLink.astro';
 .first-step {
   bottom: 0;
   opacity: var(--first-opacity);
-  animation: first-step 4s ease-in-out infinite;
+  animation: first-step var(--animation-duration) ease-in-out infinite;
 }
 
 .second-step {
   transform: scale(var(--second-scale));
   bottom: var(--second-height);
   opacity: var(--second-opacity);
-  animation: second-step 4s ease-in-out infinite;
+  animation: second-step var(--animation-duration) ease-in-out infinite;
 }
 
 .third-step {
   transform: scale(var(--third-scale));
   bottom: var(--third-height);
   opacity: var(--third-opacity);
-  animation: third-step 4s ease-in-out infinite;
+  animation: third-step var(--animation-duration) ease-in-out infinite;
 }
 
 .fourth-step {
   transform: scale(var(--fourth-scale));
   bottom: var(--fourth-height);
   opacity: var(--fourth-opacity);
-  animation: fourth-step 4s ease-in-out infinite;
+  animation: fourth-step var(--animation-duration) ease-in-out infinite;
 }
 
 .fifth-step {
   transform: scale(var(--fifth-scale));
   bottom: var(--fifth-height);
   opacity: var(--fifth-opacity);
-  animation: fifth-step 4s ease-in-out infinite;
+  animation: fifth-step var(--animation-duration) ease-in-out infinite;
 }
 
 .sixth-step {
   transform: scale(var(--sixth-scale));
   bottom: var(--sixth-height);
   opacity: 0;
-  animation: sixth-step 4s ease-in-out infinite;
+  animation: sixth-step var(--animation-duration) ease-in-out infinite;
 }
 
 @keyframes first-step {
-  to {
+  60% {
+    transform: scale(1.45);
+    bottom: -272px;
+    opacity: 1;
+  }
+  100% {
     transform: scale(1.45);
     bottom: -272px;
     opacity: 1;
@@ -140,7 +148,12 @@ import SakuraLink from '../components/SakuraLink.astro';
 }
 
 @keyframes second-step {
-  to {
+  60% {
+    transform: scale(1);
+    bottom: 0;
+    opacity: var(--first-opacity);
+  }
+  100% {
     transform: scale(1);
     bottom: 0;
     opacity: var(--first-opacity);
@@ -148,7 +161,12 @@ import SakuraLink from '../components/SakuraLink.astro';
 }
 
 @keyframes third-step {
-  to {
+  60% {
+    transform: scale(var(--second-scale));
+    bottom: var(--second-height);
+    opacity: var(--second-opacity);
+  }
+  100% {
     transform: scale(var(--second-scale));
     bottom: var(--second-height);
     opacity: var(--second-opacity);
@@ -156,7 +174,12 @@ import SakuraLink from '../components/SakuraLink.astro';
 }
 
 @keyframes fourth-step {
-  to {
+  60% {
+    transform: scale(var(--third-scale));
+    bottom: var(--third-height);
+    opacity: var(--third-opacity);
+  }
+  100% {
     transform: scale(var(--third-scale));
     bottom: var(--third-height);
     opacity: var(--third-opacity);
@@ -164,7 +187,12 @@ import SakuraLink from '../components/SakuraLink.astro';
 }
 
 @keyframes fifth-step {
-  to {
+  60% {
+    transform: scale(var(--fourth-scale));
+    bottom: var(--fourth-height);
+    opacity: var(--fourth-opacity);
+  }
+  100% {
     transform: scale(var(--fourth-scale));
     bottom: var(--fourth-height);
     opacity: var(--fourth-opacity);
@@ -172,10 +200,27 @@ import SakuraLink from '../components/SakuraLink.astro';
 }
 
 @keyframes sixth-step {
-  to {
+  60% {
     transform: scale(var(--fifth-scale));
     bottom: var(--fifth-height);
     opacity: var(--fifth-opacity);
+  }
+  100% {
+    transform: scale(var(--fifth-scale));
+    bottom: var(--fifth-height);
+    opacity: var(--fifth-opacity);
+  }
+}
+
+@keyframes stair-container {
+  0 {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(70px);
+  }
+  60% {
+    transform: translateY(0);
   }
 }
 </style>
