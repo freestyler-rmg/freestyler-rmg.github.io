@@ -39,7 +39,7 @@ import SakuraLink from '../components/SakuraLink.astro';
   --fourth-opacity: 0.22;
   --fifth-opacity: 0.154;
 
-  --animation-duration: 5s;
+  --animation-duration: 4s;
 }
 .container {
   max-width: 777px;
@@ -64,19 +64,12 @@ import SakuraLink from '../components/SakuraLink.astro';
 .stair {
   width: 100%;
   height: 160px;
-  border: var(--border-width) solid #fff;
+  border-left: var(--border-width) solid #fff;
+  border-top: var(--border-width) solid #fff;
+  border-right: var(--border-width) solid #fff;
   position: absolute;
   perspective: 45px;
   transform-origin: center bottom;
-  &::before {
-    content: '';
-    width: 100%;
-    height: calc(var(--border-width) + 3px);
-    background-color: #000;
-    position: absolute;
-    left: 0;
-    bottom: calc(-1 * var(--border-width));
-  }
   &::after {
     content: '';
     width: calc(100% + var(--border-width) * 2);
@@ -84,7 +77,6 @@ import SakuraLink from '../components/SakuraLink.astro';
     position: absolute;
     left: calc(-1 * var(--border-width));
     transform-origin: center bottom;
-    /* transform-style: preserve-3d; */
     transform: rotateX(15deg);
     top: calc(-80px - var(--border-width));
     border-left: var(--border-width) solid #fff;
@@ -219,7 +211,7 @@ import SakuraLink from '../components/SakuraLink.astro';
   40% {
     transform: translateY(70px);
   }
-  60% {
+  80% {
     transform: translateY(0);
   }
 }
